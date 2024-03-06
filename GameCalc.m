@@ -4,7 +4,8 @@ classdef GameCalc
     properties
         %Do we need any? Maybe for the reach goals?
 
-        %rollsArray?
+        rollsArrayP1;
+        rollsArrayP2;
                 
     end
     
@@ -12,13 +13,12 @@ classdef GameCalc
     methods(Static)
         function roll = diceRoll()
             %DICEROLL Generates and returns a random number between 0 and 7
-            %rolls dice and stores them as an array, can easily be added to
-            %find player score if needed
+            %rolls dice and stores them as an array, can easily be added to find player score if needed
             persistent rollsArray
             if isempty(rollsArray)
                 rollsArray = [];
             end
-            roll = randi(6);
+            roll = randi(6); 
             rollsArray = [rollsArray, roll];
             %roll = rollsArray;
         end
@@ -36,9 +36,8 @@ classdef GameCalc
 
         function winner = ScoreCalc(player1,player2)
             %GAMECALC Determines winner of each round based on game rules
-            % Return value of 1 is player1, 2 is player2, 3 is both players, 0 is dealer, and
-            % -1 is a draw
-            % Called when last player ends turn
+            % Return value of 1 is player1, 2 is player2, 3 is both players, 0 is dealer, and -1 is a draw
+            % Sould be called when last player ends turn
 
             dealerScore = GameCalc.Dealer();
             
