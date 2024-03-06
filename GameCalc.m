@@ -2,19 +2,45 @@ classdef GameCalc
     %GAMECALC - Contains Functions for Dice Rolling, Score Calculation  
     
     properties
-        Property1
-        
-        
+        %Do we need any? Maybe for the reach goals?
+
+        %rollsArray?
+                
     end
     
-    methods
-        function winner = GameCalc(player1,player2)
+
+    methods(Static)
+        function roll = diceRoll()
+            %DICEROLL Generates and returns a random number between 0 and 7
+            %rolls dice and stores them as an array, can easily be added to
+            %find player score if needed
+            persistent rollsArray
+            if isempty(rollsArray)
+                rollsArray = [];
+            end
+            roll = randi(6);
+            rollsArray = [rollsArray, roll];
+            %roll = rollsArray;
+        end
+
+        function score = Dealer()
+            %DEALER Calculates and returns dealer score
+            score = GameCalc.diceRoll() + GameCalc.diceRoll();
+            while score <= 7
+                score = score + GameCalc.diceRoll();
+            end
+            if score > 12
+                score = 0; 
+            end
+        end
+
+        function winner = ScoreCalc(player1,player2)
             %GAMECALC Determines winner of each round based on game rules
-            % Return value of 1 is player1, 2 is player2, 0 is dealer, and
+            % Return value of 1 is player1, 2 is player2, 3 is both players, 0 is dealer, and
             % -1 is a draw
             % Called when last player ends turn
 
-            dealerScore = dealer();
+            dealerScore = GameCalc.Dealer();
             
             switch player2
                 case 0                              
@@ -49,7 +75,9 @@ classdef GameCalc
                             if player1 == 0 && player2 == 0
                                 %If both players bust, a draw occurs
                                 winner = -1;
-                            elseif player1 == 0
+                            elseif player1 == player2
+                                winner = 3;
+                            elseif player1 < player2
                                 winner = 2;
                             else
                                 winner = 1;
@@ -61,30 +89,14 @@ classdef GameCalc
                                 winner = 1;
                             elseif player2 > dealerScore && player2 > player1 && player2 ~= 0
                                 winner = 2;
+                            elseif player2 == player1 && player1 > dealerScore
+                                winner = 3;
                             else
                                 winner = 0;
                             end
-                    end    
-            end   
-        end
-    end
-
-    methods(Static)
-        function roll = diceRoll()
-            %DICEROLL Generates a random number between 0 and 7
-
-        end
-
-        function score = dealer()
-            %DEALER Calculates dealer score
-            score = diceRoll + diceRoll;
-            while score <= 7
-                score = score + diceRoll;
+                    end  
             end
-            if score > 12
-                score = 0;
-            end
-        end
+        end   
     end
 end
 
