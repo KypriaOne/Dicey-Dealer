@@ -96,11 +96,7 @@ classdef GameCalc
                             end
                     end  
             end
-        end 
-
-        function dealer = dealerVal()
-            dealer = dealerScore;
-        end
+        end   
     end
 end
 
