@@ -28,7 +28,7 @@ classdef GameCalc
         function dealerScore = Dealer()
             %DEALER Calculates and returns dealer score
             dealerScore = GameCalc.diceRoll() + GameCalc.diceRoll();
-            while dealerScore <= 7
+            while dealerScore <= 8
                 dealerScore = dealerScore + GameCalc.diceRoll();
             end
             if dealerScore > 12
@@ -42,8 +42,8 @@ classdef GameCalc
             % Sould be called when last player ends turn
             %global dealerVal;
             global dealerScore;
-            dealerScore = GameCalc.Dealer();
-            %dealerVal = dealerScore;
+            %dealerScore = GameCalc.Dealer();
+            dealerScore = 1;
             switch player2
                 case -1                              
                     %If player2 is zero, game is in single player mode
@@ -77,7 +77,7 @@ classdef GameCalc
                             if player1 == 0 && player2 == 0
                                 %If both players bust, a draw occurs
                                 winner = -1;
-                            elseif player1 == player2
+                            elseif player1 > 0 && player2 > 0
                                 winner = 3;
                             elseif player1 < player2
                                 winner = 2;
@@ -91,7 +91,7 @@ classdef GameCalc
                                 winner = 1;
                             elseif player2 > dealerScore && player2 > player1 && player2 ~= 0
                                 winner = 2;
-                            elseif player2 == player1 && player1 > dealerScore
+                            elseif player2 > dealerScore && player1 == player2
                                 winner = 3;
                             else
                                 winner = 0;
