@@ -6,6 +6,7 @@ classdef GameCalc
 
         rollsArrayP1;
         rollsArrayP2;
+        dealerScore;
         %dealerVal;
                 
     end
@@ -24,14 +25,14 @@ classdef GameCalc
             %roll = rollsArray;
         end
 
-        function score = Dealer()
+        function dealerScore = Dealer()
             %DEALER Calculates and returns dealer score
-            score = GameCalc.diceRoll() + GameCalc.diceRoll();
-            while score <= 7
-                score = score + GameCalc.diceRoll();
+            dealerScore = GameCalc.diceRoll() + GameCalc.diceRoll();
+            while dealerScore <= 7
+                dealerScore = dealerScore + GameCalc.diceRoll();
             end
-            if score > 12
-                score = 0; 
+            if dealerScore > 12
+                dealerScore = 0; 
             end
         end
 
@@ -40,8 +41,9 @@ classdef GameCalc
             % Return value of 1 is player1, 2 is player2, 3 is both players, 0 is dealer, and -1 is a draw
             % Sould be called when last player ends turn
             %global dealerVal;
+            global dealerScore;
             dealerScore = GameCalc.Dealer();
-            dealerVal = dealerScore;
+            %dealerVal = dealerScore;
             switch player2
                 case -1                              
                     %If player2 is zero, game is in single player mode
@@ -99,6 +101,7 @@ classdef GameCalc
         end 
 
         function dealer = dealerVal()
+            global dealerScore; 
             dealer = dealerScore;
         end
     end
