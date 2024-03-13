@@ -104,6 +104,14 @@ classdef GameCalc
             global dealerScore; 
             dealer = dealerScore;
         end
+
+        function winnings = gamba(playerBet, winner)
+            if winner == 1
+                winnings = playerBet * 2;
+            else
+                winnings = 0;
+            end
+        end
     end
 end
 
