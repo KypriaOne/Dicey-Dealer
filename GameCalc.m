@@ -42,8 +42,8 @@ classdef GameCalc
             % Sould be called when last player ends turn
             %global dealerVal;
             global dealerScore;
-            %dealerScore = GameCalc.Dealer();
-            dealerScore = 1;
+            dealerScore = GameCalc.Dealer();
+            %dealerScore = 1;
             switch player2
                 case -1                              
                     %If player2 is zero, game is in single player mode
