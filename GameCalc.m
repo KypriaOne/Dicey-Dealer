@@ -28,7 +28,7 @@ classdef GameCalc
         function dealerScore = Dealer()
             %DEALER Calculates and returns dealer score
             dealerScore = GameCalc.diceRoll() + GameCalc.diceRoll();
-            while dealerScore <= 8
+            while dealerScore <= 6
                 dealerScore = dealerScore + GameCalc.diceRoll();
             end
             if dealerScore > 12
