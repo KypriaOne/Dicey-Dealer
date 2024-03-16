@@ -2,8 +2,6 @@ classdef GameCalc
     %GAMECALC - Contains Functions for Dice Rolling, Score Calculation  
     
     properties
-        %Do we need any? Maybe for the reach goals?
-
         rollsArrayP1;
         rollsArrayP2;
         dealerScore;
